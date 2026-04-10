@@ -10,7 +10,6 @@
 :root {
   /* --- Primary Colors --- */
   --color-primary: #186DDC;           /* Primary blue */
-  --color-primary-alt: #2B91E1;       /* Amilia blue (accents, borders) */
   --color-admin: #E67300;             /* Store admin / editing */
   --color-sidebar: #30383E;           /* Side bar / menu */
   --color-bg: #EEF4F6;               /* Default background */
@@ -68,29 +67,23 @@
 
   --line-height: 1.5;
 
-  /* --- Spacing --- */
-  --space-1: 0.25rem;   /* 4px */
-  --space-2: 0.5rem;    /* 8px */
-  --space-3: 0.75rem;   /* 12px */
-  --space-4: 1rem;      /* 16px */
-  --space-5: 1.25rem;   /* 20px */
-  --space-6: 1.5rem;    /* 24px */
-  --space-8: 2rem;      /* 32px */
-  --space-10: 2.5rem;   /* 40px */
-  --space-12: 3rem;     /* 48px */
-  --space-16: 4rem;     /* 64px */
+  /* --- Spacing (4px base grid) --- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
 
   /* --- Border Radius --- */
-  --radius-sm: 0.25rem;  /* 4px */
-  --radius-md: 0.375rem; /* 6px */
-  --radius-lg: 0.5rem;   /* 8px */
-  --radius-xl: 0.75rem;  /* 12px */
-  --radius-full: 9999px;
+  --radius: 4px;                      /* Standard radius — used everywhere */
 
   /* --- Shadows --- */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 2px 5px 0 #D3D3D3; /* Card shadow */
 
   /* --- Transitions --- */
   --transition-fast: 150ms ease;
@@ -98,6 +91,8 @@
   --transition-slow: 300ms ease;
 
   /* --- Layout --- */
+  --padding-screen: 40px;             /* Page-level padding */
+  --padding-card: 24px;               /* Card internal padding */
   --max-width-content: 1200px;
   --sidebar-width: 260px;
   --header-height: 56px;
