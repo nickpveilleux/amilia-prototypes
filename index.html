@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amilia Prototypes</title>
+  <link rel="stylesheet" href="tokens/tokens.css">
+  <link rel="stylesheet" href="tokens/reset.css">
+  <style>
+    body {
+      background: var(--color-bg-secondary);
+      min-height: 100vh;
+    }
+    .gallery {
+      max-width: var(--max-width-content);
+      margin: 0 auto;
+      padding: var(--space-12) var(--space-6);
+    }
+    .gallery h1 {
+      font-size: var(--text-3xl);
+      margin-bottom: var(--space-2);
+    }
+    .gallery p {
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-8);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-6);
+    }
+    .card {
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6);
+      transition: box-shadow var(--transition-base), border-color var(--transition-base);
+    }
+    .card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-border-strong);
+    }
+    .card h2 {
+      font-size: var(--text-lg);
+      margin-bottom: var(--space-2);
+    }
+    .card p {
+      font-size: var(--text-sm);
+      color: var(--color-text-secondary);
+      margin-bottom: var(--space-4);
+    }
+    .card a {
+      font-size: var(--text-sm);
+      font-weight: var(--font-weight-medium);
+    }
+    .empty {
+      text-align: center;
+      padding: var(--space-16) var(--space-6);
+      color: var(--color-text-muted);
+    }
+    .empty p {
+      color: var(--color-text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="gallery">
+    <h1>Amilia Prototypes</h1>
+    <p>Rapid design explorations for Amilia product design.</p>
+
+    <div class="grid">
+      <!-- Add prototype cards here as new prototypes are created -->
+      <!--
+      <div class="card">
+        <h2>Project Name</h2>
+        <p>Brief description of what this prototype explores.</p>
+        <a href="prototypes/project-name/">View prototype &rarr;</a>
+      </div>
+      -->
+    </div>
+
+    <div class="empty">
+      <p>No prototypes yet. Create one in <code>prototypes/</code> to get started.</p>
+    </div>
+  </div>
+</body>
+</html>
