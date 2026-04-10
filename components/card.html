@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-5);
+      border-bottom: 0.5px solid var(--color-header-line);
+      box-shadow: 0 0 2px var(--color-content-line);
+    }
+
+    .card__title {
+      font-family: var(--font-family);
+      font-size: 16.8px;
+      font-weight: var(--font-weight-normal);
+      color: #565656;
+      line-height: var(--line-height);
+    }
+
+    .card__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #565656;
+      border-radius: var(--radius);
+      transition: background var(--transition-fast);
+    }
+
+    .card__close:hover {
+      background: var(--color-stripes);
+    }
+
+    .card__body {
+      padding: var(--space-5);
+      background: var(--color-bg-white);
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <!-- Basic card -->
+    <div class="card">
+      <div class="card__header">
+        <span class="card__title">Card Title</span>
+      </div>
+      <div class="card__body">
+        <p>Card body content goes here. This is a basic card with a title header and body section.</p>
+      </div>
+    </div>
+
+    <!-- Card with close button -->
+    <div class="card">
+      <div class="card__header">
+        <span class="card__title">Card with Close</span>
+        <button class="card__close" aria-label="Close">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M2 2l10 10M12 2L2 12"/>
+          </svg>
+        </button>
+      </div>
+      <div class="card__body">
+        <p>This card has an optional close button in the title bar.</p>
+      </div>
+    </div>
+
+    <!-- Card without header -->
+    <div class="card">
+      <div class="card__body">
+        <p>A card can also be used without a header, just the body section.</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

@@ -24,6 +24,7 @@
   --color-text-placeholder: #535353;  /* Placeholders, tooltips */
   --color-text-help: #707070;         /* Help text */
   --color-text-inverse: #FFFFFF;      /* Text on dark backgrounds */
+  --color-text-sidebar: #ECECEC;      /* Sidebar menu text */
 
   /* --- Status Colors --- */
   --color-success: #00802F;

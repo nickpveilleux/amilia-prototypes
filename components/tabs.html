@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .tabs {
+      display: flex;
+      align-items: flex-end;
+      padding: 0 15px;
+      border-bottom: 0.5px solid var(--color-header-line);
+      background: var(--color-bg-white);
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 5px var(--space-5);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-primary);
+      background: transparent;
+      border: none;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom: 0.5px solid var(--color-header-line);
+      cursor: pointer;
+      transition: color var(--transition-fast), background var(--transition-fast);
+      position: relative;
+      margin-bottom: -0.5px;
+    }
+
+    .tab:hover {
+      color: #333333;
+      background: var(--color-stripes);
+    }
+
+    .tab--selected {
+      color: #333333;
+      border: 0.5px solid var(--color-header-line);
+      border-bottom: 0.5px solid var(--color-bg-white);
+      background: var(--color-bg-white);
+      cursor: default;
+    }
+
+    .tab--selected:hover {
+      background: var(--color-bg-white);
+    }
+
+    .tab__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5px 5px;
+      background: var(--color-tag-turquoise-light);
+      border-radius: 3px;
+      font-family: var(--font-family);
+      font-size: 10.5px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-heading);
+      line-height: 1;
+    }
+
+    /* Tab content panel */
+    .tab-panel {
+      padding: var(--space-5);
+      background: var(--color-bg-white);
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      max-width: 700px;
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-1);
+    }
+
+    .demo-card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <h3>Tabs</h3>
+    <div class="demo-card">
+      <div class="tabs">
+        <button class="tab tab--selected">General</button>
+        <button class="tab">Schedule <span class="tab__badge">3</span></button>
+        <button class="tab">Pricing</button>
+        <button class="tab">Registration <span class="tab__badge">12</span></button>
+        <button class="tab">Settings</button>
+      </div>
+      <div class="tab-panel">
+        <p>Tab content for "General" would appear here.</p>
+      </div>
+    </div>
+
+    <h3>Tabs (second item selected)</h3>
+    <div class="demo-card">
+      <div class="tabs">
+        <button class="tab">Overview</button>
+        <button class="tab tab--selected">Members <span class="tab__badge">24</span></button>
+        <button class="tab">Billing</button>
+      </div>
+      <div class="tab-panel">
+        <p>Tab content for "Members" would appear here.</p>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

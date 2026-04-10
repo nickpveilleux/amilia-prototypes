@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    /* ---- Base Button ---- */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      height: 34px;
+      padding: 6px var(--space-3);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      line-height: 14px;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn:focus-visible {
+      outline: none;
+    }
+
+    /* ---- Icon-only button ---- */
+    .btn--icon {
+      height: 33px;
+      width: 33px;
+      padding: 0;
+    }
+
+    /* ---- Primary ---- */
+    .btn--primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn--primary:hover {
+      background: #1357B0;
+    }
+
+    .btn--primary:focus-visible {
+      background: #1357B0;
+      box-shadow: 0 0 0 2px #072142;
+    }
+
+    .btn--primary.btn--inactive {
+      background: #ABABAB;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ---- Secondary ---- */
+    .btn--secondary {
+      background: transparent;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+    }
+
+    .btn--secondary:hover {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn--secondary:focus-visible {
+      box-shadow: 0 0 0 2px #072142;
+    }
+
+    .btn--secondary.btn--inactive {
+      background: var(--color-inactive);
+      border-color: #ABABAB;
+      color: #ABABAB;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ---- Tertiary ---- */
+    .btn--tertiary {
+      background: transparent;
+      color: var(--color-text-heading);
+    }
+
+    .btn--tertiary:hover {
+      background: #CCCCCC;
+    }
+
+    .btn--tertiary:focus-visible {
+      box-shadow: 0 0 0 2px #072142;
+    }
+
+    .btn--tertiary.btn--inactive {
+      opacity: 0.3;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ---- Action (3-dot menu) ---- */
+    .btn--action {
+      background: transparent;
+      color: var(--color-text-heading);
+      border: 1px solid var(--color-content-line);
+    }
+
+    .btn--action:hover {
+      background: var(--color-stripes);
+    }
+
+    /* ---- Download ---- */
+    .btn--download {
+      background: transparent;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+    }
+
+    .btn--download:hover {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    .btn--download svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ---- Arrow buttons ---- */
+    .btn--arrow {
+      background: transparent;
+      color: var(--color-text-heading);
+      border: 1px solid var(--color-content-line);
+    }
+
+    .btn--arrow:hover {
+      background: var(--color-stripes);
+    }
+
+    .btn--arrow svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    /* ====== Demo Layout ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .demo-section {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .demo-section h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-2);
+    }
+
+    .demo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .demo-label {
+      font-size: 11px;
+      color: var(--color-text-help);
+      min-width: 70px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <!-- Primary -->
+    <div class="demo-section">
+      <h3>Primary</h3>
+      <div class="demo-row">
+        <span class="demo-label">Default</span>
+        <button class="btn btn--primary">Primary</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Hover</span>
+        <button class="btn btn--primary" style="background:#1357B0">Primary Hover</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Inactive</span>
+        <button class="btn btn--primary btn--inactive">Primary Inactive</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Focus</span>
+        <button class="btn btn--primary" style="background:#1357B0;box-shadow:0 0 0 2px #072142">Primary Focus</button>
+      </div>
+    </div>
+
+    <!-- Secondary -->
+    <div class="demo-section">
+      <h3>Secondary</h3>
+      <div class="demo-row">
+        <span class="demo-label">Default</span>
+        <button class="btn btn--secondary">Secondary</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Hover</span>
+        <button class="btn btn--secondary" style="background:var(--color-primary);color:white">Secondary Hover</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Inactive</span>
+        <button class="btn btn--secondary btn--inactive">Secondary Inactive</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Focus</span>
+        <button class="btn btn--secondary" style="box-shadow:0 0 0 2px #072142">Secondary Focus</button>
+      </div>
+    </div>
+
+    <!-- Tertiary -->
+    <div class="demo-section">
+      <h3>Tertiary</h3>
+      <div class="demo-row">
+        <span class="demo-label">Default</span>
+        <button class="btn btn--tertiary">Tertiary</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Hover</span>
+        <button class="btn btn--tertiary" style="background:#CCCCCC">Tertiary Hover</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Inactive</span>
+        <button class="btn btn--tertiary btn--inactive">Tertiary Inactive</button>
+      </div>
+      <div class="demo-row">
+        <span class="demo-label">Focus</span>
+        <button class="btn btn--tertiary" style="box-shadow:0 0 0 2px #072142">Tertiary Focus</button>
+      </div>
+    </div>
+
+    <!-- Action / Download / Arrows -->
+    <div class="demo-section">
+      <h3>Action, Download, Arrows</h3>
+      <div class="demo-row">
+        <button class="btn btn--action btn--icon" aria-label="More actions">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="2" r="1.5"/><circle cx="7" cy="7" r="1.5"/><circle cx="7" cy="12" r="1.5"/></svg>
+        </button>
+
+        <button class="btn btn--download">
+          <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M7 1v9m0 0L4 7m3 3l3-3M2 12h10"/></svg>
+          Download
+        </button>
+
+        <button class="btn btn--arrow btn--icon" aria-label="Previous">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 1L3 6l5 5"/></svg>
+        </button>
+
+        <button class="btn btn--arrow btn--icon" aria-label="Next">
+          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 1l5 5-5 5"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

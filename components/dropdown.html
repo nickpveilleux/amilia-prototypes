@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dropdown Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    /* Reuse field patterns from text-field */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .field__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .field__label-group {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+    }
+
+    .field__label {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-body);
+    }
+
+    .field__required {
+      font-size: 11.2px;
+      color: #6C757D;
+    }
+
+    .field__error {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-family: var(--font-family);
+      font-size: 11.2px;
+      color: var(--color-error);
+    }
+
+    .field__error svg {
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+    }
+
+    /* ---- Dropdown ---- */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown__trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-placeholder);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      padding: 5px var(--space-2);
+      background: var(--color-bg-white);
+      cursor: pointer;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      outline: none;
+      text-align: left;
+    }
+
+    .dropdown__trigger::placeholder {
+      color: #ABABAB;
+    }
+
+    .dropdown__trigger--placeholder {
+      color: #ABABAB;
+    }
+
+    .dropdown__chevron {
+      flex-shrink: 0;
+      margin-left: var(--space-2);
+      transition: transform var(--transition-fast);
+    }
+
+    .dropdown--open .dropdown__chevron {
+      transform: rotate(180deg);
+    }
+
+    /* Focus */
+    .dropdown__trigger:focus {
+      border-color: #69B3EF;
+      box-shadow: 0 0 5px rgba(105, 179, 239, 0.8);
+    }
+
+    /* Error */
+    .field--error .dropdown__trigger {
+      border-color: var(--color-error);
+    }
+
+    /* Disabled */
+    .field--disabled .dropdown__trigger {
+      color: #ABABAB;
+      background: var(--color-stripes);
+      cursor: not-allowed;
+    }
+
+    .field--disabled .field__label {
+      color: #ABABAB;
+    }
+
+    /* ---- Dropdown List ---- */
+    .dropdown__list {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      right: 0;
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      box-shadow: var(--shadow-card);
+      z-index: 50;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .dropdown--open .dropdown__list {
+      display: block;
+    }
+
+    .dropdown__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .dropdown__item:hover {
+      background: #E8F0FE;
+    }
+
+    .dropdown__item--selected {
+      background: #E8F0FE;
+      font-weight: var(--font-weight-medium);
+    }
+
+    /* Checkbox variant items */
+    .dropdown__item-checkbox {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      max-width: 400px;
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <h3>Dropdown (Closed)</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label">Province</label>
+          <span class="field__required">(Required)</span>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown__trigger">
+          <span>Quebec</span>
+          <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <h3>Dropdown (Open)</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label">Country</label>
+          <span class="field__required">(Required)</span>
+        </div>
+      </div>
+      <div class="dropdown dropdown--open">
+        <button class="dropdown__trigger">
+          <span>Canada</span>
+          <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="dropdown__list">
+          <div class="dropdown__item dropdown__item--selected">Canada</div>
+          <div class="dropdown__item">United States</div>
+          <div class="dropdown__item">Mexico</div>
+          <div class="dropdown__item">France</div>
+          <div class="dropdown__item">United Kingdom</div>
+        </div>
+      </div>
+    </div>
+
+    <h3>Dropdown (Placeholder)</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label">Category</label>
+          <span class="field__required">(Optional)</span>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown__trigger dropdown__trigger--placeholder">
+          <span>Select a category</span>
+          <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <h3>Dropdown (Error)</h3>
+    <div class="field field--error">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label">Location</label>
+          <span class="field__required">(Required)</span>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown__trigger dropdown__trigger--placeholder">
+          <span>Select a location</span>
+          <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="field__error">
+        <svg viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="#DE1316" stroke-width="1.5"/>
+          <path d="M7 4v4" stroke="#DE1316" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="7" cy="10.5" r="0.8" fill="#DE1316"/>
+        </svg>
+        Location is required
+      </div>
+    </div>
+
+    <h3>Dropdown (Disabled)</h3>
+    <div class="field field--disabled">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label">Time zone</label>
+        </div>
+      </div>
+      <div class="dropdown">
+        <button class="dropdown__trigger" disabled>
+          <span>Eastern (UTC-5)</span>
+          <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#ABABAB" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <h3>Multi-select (Checkbox variant, Open)</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label">Tags</label>
+          <span class="field__required">(Optional)</span>
+        </div>
+      </div>
+      <div class="dropdown dropdown--open">
+        <button class="dropdown__trigger">
+          <span>2 selected</span>
+          <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+            <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="dropdown__list">
+          <label class="dropdown__item">
+            <input class="dropdown__item-checkbox" type="checkbox" checked>
+            Swimming
+          </label>
+          <label class="dropdown__item">
+            <input class="dropdown__item-checkbox" type="checkbox">
+            Tennis
+          </label>
+          <label class="dropdown__item">
+            <input class="dropdown__item-checkbox" type="checkbox" checked>
+            Yoga
+          </label>
+          <label class="dropdown__item">
+            <input class="dropdown__item-checkbox" type="checkbox">
+            Basketball
+          </label>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

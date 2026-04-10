@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Field Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+    }
+
+    .field__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .field__label-group {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+    }
+
+    .field__label {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-body);
+    }
+
+    .field__required {
+      font-size: 11.2px;
+      color: #6C757D;
+    }
+
+    .field__lang-toggle {
+      display: flex;
+      gap: var(--space-1);
+      font-size: 11.2px;
+    }
+
+    .field__lang {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: var(--font-family);
+      font-size: 11.2px;
+      color: var(--color-primary);
+      padding: 0;
+    }
+
+    .field__lang--active {
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-heading);
+      cursor: default;
+    }
+
+    .field__lang-sep {
+      color: #6C757D;
+    }
+
+    .field__input {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-placeholder);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      padding: 5px var(--space-2);
+      background: var(--color-bg-white);
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+      outline: none;
+    }
+
+    .field__input::placeholder {
+      color: #ABABAB;
+    }
+
+    .field__input:focus {
+      border-color: #69B3EF;
+      box-shadow: 0 0 5px rgba(105, 179, 239, 0.8);
+    }
+
+    /* Error state */
+    .field--error .field__input {
+      border-color: var(--color-error);
+    }
+
+    .field--error .field__input:focus {
+      border-color: var(--color-error);
+      box-shadow: 0 0 5px rgba(222, 19, 22, 0.3);
+    }
+
+    .field__error {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-family: var(--font-family);
+      font-size: 11.2px;
+      color: var(--color-error);
+    }
+
+    .field__error svg {
+      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
+    }
+
+    /* Disabled state */
+    .field--disabled .field__label {
+      color: #ABABAB;
+    }
+
+    .field--disabled .field__input {
+      color: #ABABAB;
+      background: var(--color-stripes);
+      cursor: not-allowed;
+    }
+
+    /* Textarea */
+    .field__textarea {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-placeholder);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      padding: var(--space-2);
+      background: var(--color-bg-white);
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .field__textarea:focus {
+      border-color: #69B3EF;
+      box-shadow: 0 0 5px rgba(105, 179, 239, 0.8);
+    }
+
+    /* Helper text */
+    .field__helper {
+      font-family: var(--font-family);
+      font-size: 11.2px;
+      color: #6C757D;
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+      max-width: 400px;
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <h3>Default (Required)</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f1">First name</label>
+          <span class="field__required">(Required)</span>
+        </div>
+      </div>
+      <input class="field__input" type="text" id="f1" value="John">
+      <span class="field__helper">Enter your legal first name</span>
+    </div>
+
+    <h3>Optional</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f2">Middle name</label>
+          <span class="field__required">(Optional)</span>
+        </div>
+      </div>
+      <input class="field__input" type="text" id="f2" placeholder="Enter middle name">
+    </div>
+
+    <h3>Hidden indicator</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f3">Username</label>
+        </div>
+      </div>
+      <input class="field__input" type="text" id="f3" placeholder="Enter username">
+    </div>
+
+    <h3>Focused</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f4">Email</label>
+          <span class="field__required">(Required)</span>
+        </div>
+      </div>
+      <input class="field__input" type="email" id="f4" value="john@example.com" style="border-color:#69B3EF;box-shadow:0 0 5px rgba(105,179,239,0.8)">
+    </div>
+
+    <h3>Error</h3>
+    <div class="field field--error">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f5">Phone number</label>
+          <span class="field__required">(Required)</span>
+        </div>
+      </div>
+      <input class="field__input" type="text" id="f5" value="123">
+      <div class="field__error">
+        <svg viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="6" stroke="#DE1316" stroke-width="1.5"/>
+          <path d="M7 4v4" stroke="#DE1316" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="7" cy="10.5" r="0.8" fill="#DE1316"/>
+        </svg>
+        Phone number must be 10 digits
+      </div>
+    </div>
+
+    <h3>Disabled</h3>
+    <div class="field field--disabled">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f6">Account ID</label>
+        </div>
+      </div>
+      <input class="field__input" type="text" id="f6" value="ACC-12345" disabled>
+    </div>
+
+    <h3>Large (Textarea)</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f7">Description</label>
+          <span class="field__required">(Optional)</span>
+        </div>
+      </div>
+      <textarea class="field__textarea" id="f7" placeholder="Enter a description..."></textarea>
+    </div>
+
+    <h3>With Language Toggle</h3>
+    <div class="field">
+      <div class="field__header">
+        <div class="field__label-group">
+          <label class="field__label" for="f8">Activity name</label>
+          <span class="field__required">(Required)</span>
+        </div>
+        <div class="field__lang-toggle">
+          <button class="field__lang field__lang--active">EN</button>
+          <span class="field__lang-sep">|</span>
+          <button class="field__lang">FR</button>
+        </div>
+      </div>
+      <input class="field__input" type="text" id="f8" value="Swimming Lessons">
+    </div>
+
+  </div>
+</body>
+</html>

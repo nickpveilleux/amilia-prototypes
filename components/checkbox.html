@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkbox Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox__input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .checkbox__box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--color-header-line);
+      border-radius: 3px;
+      background: var(--color-bg-white);
+      flex-shrink: 0;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .checkbox__check {
+      display: none;
+    }
+
+    /* Checked */
+    .checkbox__input:checked + .checkbox__box {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+    }
+
+    .checkbox__input:checked + .checkbox__box .checkbox__check {
+      display: block;
+    }
+
+    /* Disabled */
+    .checkbox--disabled {
+      cursor: default;
+    }
+
+    .checkbox--disabled .checkbox__box {
+      border-color: var(--color-header-line);
+      background: var(--color-bg-white);
+    }
+
+    .checkbox--disabled .checkbox__input:checked + .checkbox__box {
+      background: #ABABAB;
+      border-color: #ABABAB;
+    }
+
+    .checkbox__label {
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-heading);
+      line-height: var(--line-height);
+    }
+
+    .checkbox--disabled .checkbox__label {
+      color: #ABABAB;
+    }
+
+    /* Focus ring */
+    .checkbox__input:focus-visible + .checkbox__box {
+      box-shadow: 0 0 0 2px #072142;
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-1);
+    }
+
+    .demo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <h3>Checkbox States</h3>
+    <div class="demo-row">
+
+      <!-- Unchecked -->
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox">
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Unchecked</span>
+      </label>
+
+      <!-- Checked -->
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox" checked>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Checked</span>
+      </label>
+
+      <!-- Disabled unchecked -->
+      <label class="checkbox checkbox--disabled">
+        <input class="checkbox__input" type="checkbox" disabled>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Disabled</span>
+      </label>
+
+      <!-- Disabled checked -->
+      <label class="checkbox checkbox--disabled">
+        <input class="checkbox__input" type="checkbox" checked disabled>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Checked Disabled</span>
+      </label>
+
+    </div>
+
+    <h3>Checkbox Group Example</h3>
+    <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox" checked>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Email notifications</span>
+      </label>
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox">
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">SMS notifications</span>
+      </label>
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox" checked>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Push notifications</span>
+      </label>
+    </div>
+
+  </div>
+</body>
+</html>

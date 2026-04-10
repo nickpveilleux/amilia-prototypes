@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Filter Bar Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+    }
+
+    /* Search input */
+    .filter-bar__search {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 34px;
+      padding: 0 var(--space-3);
+      background: var(--color-bg-white);
+      border: 1px solid #ABABAB;
+      border-radius: 3px;
+      min-width: 220px;
+    }
+
+    .filter-bar__search-icon {
+      flex-shrink: 0;
+      color: #ABABAB;
+    }
+
+    .filter-bar__search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      outline: none;
+    }
+
+    .filter-bar__search-input::placeholder {
+      color: #ABABAB;
+    }
+
+    /* Secondary-style buttons */
+    .filter-bar__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 6px var(--space-3);
+      background: transparent;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      line-height: 14px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .filter-bar__btn:hover {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-8);
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <h3>Filter Bar</h3>
+    <div class="filter-bar">
+      <div class="filter-bar__search">
+        <svg class="filter-bar__search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="6.5" cy="6.5" r="5.5" stroke="#ABABAB" stroke-width="1.5"/>
+          <path d="M11 11l4 4" stroke="#ABABAB" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input class="filter-bar__search-input" type="text" placeholder="Search">
+      </div>
+      <button class="filter-bar__btn">Columns (8)</button>
+      <button class="filter-bar__btn">Filters (2)</button>
+    </div>
+
+    <h3>Filter Bar (no active filters)</h3>
+    <div class="filter-bar">
+      <div class="filter-bar__search">
+        <svg class="filter-bar__search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="6.5" cy="6.5" r="5.5" stroke="#ABABAB" stroke-width="1.5"/>
+          <path d="M11 11l4 4" stroke="#ABABAB" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input class="filter-bar__search-input" type="text" placeholder="Search">
+      </div>
+      <button class="filter-bar__btn">Columns (5)</button>
+      <button class="filter-bar__btn">Filters (0)</button>
+    </div>
+
+  </div>
+</body>
+</html>

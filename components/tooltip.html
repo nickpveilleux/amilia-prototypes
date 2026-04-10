@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tooltip Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .tooltip-trigger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tooltip-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 21px;
+      cursor: help;
+    }
+
+    /* Popover */
+    .tooltip-popover {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-sidebar);
+      border-radius: 3px;
+      padding: 10px;
+      min-width: 180px;
+      max-width: 280px;
+      white-space: normal;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .tooltip-trigger:hover .tooltip-popover,
+    .tooltip-trigger:focus-within .tooltip-popover {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .tooltip-popover__text {
+      font-family: var(--font-family);
+      font-size: 10px;
+      font-weight: var(--font-weight-normal);
+      color: #F8F8F8;
+      line-height: 15px;
+    }
+
+    /* Arrow */
+    .tooltip-popover__arrow {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--color-sidebar);
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: 120px var(--space-10) var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-12);
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-2);
+    }
+
+    .demo-row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-8);
+    }
+
+    .demo-label {
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+    }
+
+    /* Force-show for demo */
+    .tooltip-trigger--demo .tooltip-popover {
+      opacity: 1;
+      pointer-events: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <h3>Tooltip (hover to show)</h3>
+    <div class="demo-row">
+      <span class="demo-label">Hover the icon:</span>
+      <span class="tooltip-trigger">
+        <svg class="tooltip-icon" viewBox="0 0 18 21" fill="none">
+          <circle cx="9" cy="10.5" r="8" stroke="#183252" stroke-width="1.5"/>
+          <text x="9" y="15" text-anchor="middle" fill="#183252" font-size="12" font-weight="600" font-family="var(--font-family)">?</text>
+        </svg>
+        <span class="tooltip-popover">
+          <span class="tooltip-popover__text">This field controls the visibility of the activity in the public store listing.</span>
+          <span class="tooltip-popover__arrow"></span>
+        </span>
+      </span>
+    </div>
+
+    <h3>Tooltip (always visible, demo)</h3>
+    <div class="demo-row">
+      <span class="demo-label">Always visible:</span>
+      <span class="tooltip-trigger tooltip-trigger--demo">
+        <svg class="tooltip-icon" viewBox="0 0 18 21" fill="none">
+          <circle cx="9" cy="10.5" r="8" stroke="#183252" stroke-width="1.5"/>
+          <text x="9" y="15" text-anchor="middle" fill="#183252" font-size="12" font-weight="600" font-family="var(--font-family)">?</text>
+        </svg>
+        <span class="tooltip-popover">
+          <span class="tooltip-popover__text">Maximum number of participants allowed per session. Leave empty for unlimited.</span>
+          <span class="tooltip-popover__arrow"></span>
+        </span>
+      </span>
+    </div>
+
+  </div>
+</body>
+</html>

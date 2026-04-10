@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Table Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    /* ---- Card wrapper ---- */
+    .table-card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    /* ---- Top bar ---- */
+    .table-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-5);
+      border-bottom: 1px solid var(--color-content-line);
+    }
+
+    .table-topbar__title {
+      font-family: var(--font-family);
+      font-size: 16.8px;
+      font-weight: var(--font-weight-normal);
+      color: #565656;
+    }
+
+    .table-topbar__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .table-topbar__action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 33px;
+      height: 33px;
+      background: none;
+      border: 1px solid var(--color-content-line);
+      border-radius: var(--radius);
+      cursor: pointer;
+      color: var(--color-text-heading);
+      transition: background var(--transition-fast);
+    }
+
+    .table-topbar__action-btn:hover {
+      background: var(--color-stripes);
+    }
+
+    /* ---- Table ---- */
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+    }
+
+    .table th {
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-heading);
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-content-line);
+      white-space: nowrap;
+    }
+
+    .table td {
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-body);
+    }
+
+    /* Alternating stripes */
+    .table tbody tr:nth-child(odd) {
+      background: var(--color-stripes);
+    }
+
+    .table tbody tr:nth-child(even) {
+      background: var(--color-bg-white);
+    }
+
+    /* Sortable column header */
+    .table__sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .table__sortable:hover {
+      color: var(--color-primary);
+    }
+
+    .table__sort-icon {
+      display: inline-block;
+      margin-left: var(--space-1);
+      vertical-align: middle;
+    }
+
+    /* Checkbox column */
+    .table__checkbox {
+      width: 40px;
+    }
+
+    .table__checkbox-input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    /* Link cells */
+    .table__link {
+      color: var(--color-primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .table__link:hover {
+      text-decoration: underline;
+    }
+
+    /* Status badges */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      border-radius: 3px;
+      font-family: var(--font-family);
+      font-size: 12px;
+      font-weight: var(--font-weight-medium);
+      white-space: nowrap;
+    }
+
+    .status-badge--active {
+      background: #D4EDDA;
+      color: var(--color-success);
+    }
+
+    .status-badge--pending {
+      background: #FFF3CD;
+      color: #856404;
+    }
+
+    .status-badge--inactive {
+      background: var(--color-inactive);
+      color: #6C757D;
+    }
+
+    .status-badge--error {
+      background: #F8D7DA;
+      color: var(--color-error);
+    }
+
+    /* ---- Pagination ---- */
+    .table-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-5);
+      border-top: 1px solid var(--color-content-line);
+    }
+
+    .table-pagination__info {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: #565656;
+    }
+
+    .table-pagination__pages {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .table-pagination__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 var(--space-2);
+      background: none;
+      border: 1px solid var(--color-content-line);
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast);
+    }
+
+    .table-pagination__btn:hover {
+      background: var(--color-stripes);
+    }
+
+    .table-pagination__btn--active {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: var(--color-primary);
+    }
+
+    .table-pagination__btn--active:hover {
+      background: #1357B0;
+    }
+
+    .table-pagination__btn--nav {
+      color: var(--color-text-heading);
+    }
+
+    .table-pagination__btn:disabled {
+      opacity: 0.4;
+      cursor: default;
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      max-width: 900px;
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <div class="table-card">
+      <div class="table-topbar">
+        <span class="table-topbar__title">Members</span>
+        <div class="table-topbar__actions">
+          <button class="table-topbar__action-btn" aria-label="More actions">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><circle cx="7" cy="2" r="1.5"/><circle cx="7" cy="7" r="1.5"/><circle cx="7" cy="12" r="1.5"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="table__checkbox">
+              <input class="table__checkbox-input" type="checkbox" aria-label="Select all">
+            </th>
+            <th class="table__sortable">
+              Name
+              <svg class="table__sort-icon" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M4 0L7.5 4H0.5L4 0Z" fill="#0F1111"/>
+                <path d="M4 12L0.5 8H7.5L4 12Z" fill="#CED4DA"/>
+              </svg>
+            </th>
+            <th class="table__sortable">
+              Email
+              <svg class="table__sort-icon" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M4 0L7.5 4H0.5L4 0Z" fill="#CED4DA"/>
+                <path d="M4 12L0.5 8H7.5L4 12Z" fill="#CED4DA"/>
+              </svg>
+            </th>
+            <th>Status</th>
+            <th class="table__sortable">
+              Joined
+              <svg class="table__sort-icon" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M4 0L7.5 4H0.5L4 0Z" fill="#CED4DA"/>
+                <path d="M4 12L0.5 8H7.5L4 12Z" fill="#0F1111"/>
+              </svg>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">Alice Martin</a></td>
+            <td>alice.martin@example.com</td>
+            <td><span class="status-badge status-badge--active">Active</span></td>
+            <td>2025-01-15</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">Bob Johnson</a></td>
+            <td>bob.j@example.com</td>
+            <td><span class="status-badge status-badge--pending">Pending</span></td>
+            <td>2025-02-20</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox" checked></td>
+            <td><a class="table__link" href="#">Claire Dubois</a></td>
+            <td>claire.d@example.com</td>
+            <td><span class="status-badge status-badge--active">Active</span></td>
+            <td>2025-03-01</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">David Lee</a></td>
+            <td>david.lee@example.com</td>
+            <td><span class="status-badge status-badge--inactive">Inactive</span></td>
+            <td>2024-11-10</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">Emma Wilson</a></td>
+            <td>emma.w@example.com</td>
+            <td><span class="status-badge status-badge--error">Suspended</span></td>
+            <td>2024-09-05</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-pagination">
+        <span class="table-pagination__info">Showing 1-5 of 24</span>
+        <div class="table-pagination__pages">
+          <button class="table-pagination__btn table-pagination__btn--nav" disabled aria-label="Previous">
+            <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 1L1.5 6l5 5"/></svg>
+          </button>
+          <button class="table-pagination__btn table-pagination__btn--active">1</button>
+          <button class="table-pagination__btn">2</button>
+          <button class="table-pagination__btn">3</button>
+          <button class="table-pagination__btn">4</button>
+          <button class="table-pagination__btn">5</button>
+          <button class="table-pagination__btn table-pagination__btn--nav" aria-label="Next">
+            <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 1l5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

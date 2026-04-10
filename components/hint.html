@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hint Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .hint {
+      display: flex;
+      gap: var(--space-3);
+      background: var(--color-bg-white);
+      border: 1px solid;
+      border-left-width: 10px;
+      border-radius: 3px;
+      padding: 15px 18px 15px 25px;
+    }
+
+    /* Color variants */
+    .hint--info {
+      border-color: var(--color-info-tip);
+    }
+
+    .hint--warning {
+      border-color: var(--color-warning);
+    }
+
+    .hint--error {
+      border-color: var(--color-error);
+    }
+
+    .hint__icon {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      margin-top: 1px;
+    }
+
+    .hint__content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hint__title {
+      font-family: var(--font-family);
+      font-size: 16px;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-heading);
+      line-height: var(--line-height);
+      margin-bottom: var(--space-1);
+    }
+
+    .hint__description {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: #565656;
+      line-height: 25px;
+    }
+
+    .hint__action {
+      display: inline-block;
+      margin-top: var(--space-2);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      color: var(--color-primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .hint__action:hover {
+      text-decoration: underline;
+    }
+
+    .hint__dismiss {
+      flex-shrink: 0;
+      display: flex;
+      align-items: flex-start;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #565656;
+      padding: 0;
+      margin-top: 2px;
+    }
+
+    .hint__dismiss:hover {
+      color: var(--color-text-heading);
+    }
+
+    /* Error summary list */
+    .hint__error-list {
+      list-style: none;
+      margin-top: var(--space-2);
+    }
+
+    .hint__error-list li {
+      margin-bottom: var(--space-1);
+    }
+
+    .hint__error-link {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-error);
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .hint__error-link:hover {
+      color: #B00F12;
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+      max-width: 700px;
+    }
+
+    .demo h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-1);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <!-- Information -->
+    <h3>Information</h3>
+    <div class="hint hint--info">
+      <svg class="hint__icon" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="11" stroke="#183252" stroke-width="2"/>
+        <path d="M12 11v6" stroke="#183252" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="7.5" r="1.2" fill="#183252"/>
+      </svg>
+      <div class="hint__content">
+        <div class="hint__title">Information title</div>
+        <div class="hint__description">This is an informational message providing helpful context to the user about a feature or process.</div>
+        <a class="hint__action" href="#">Learn more</a>
+      </div>
+      <button class="hint__dismiss" aria-label="Dismiss">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M2 2l10 10M12 2L2 12"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Warning -->
+    <h3>Warning</h3>
+    <div class="hint hint--warning">
+      <svg class="hint__icon" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2L1 21h22L12 2z" stroke="#D68100" stroke-width="2" stroke-linejoin="round"/>
+        <path d="M12 10v5" stroke="#D68100" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="18" r="1" fill="#D68100"/>
+      </svg>
+      <div class="hint__content">
+        <div class="hint__title">Warning title</div>
+        <div class="hint__description">This is a warning message alerting the user to something that requires their attention but is not critical.</div>
+      </div>
+    </div>
+
+    <!-- Error Summary -->
+    <h3>Error Summary</h3>
+    <div class="hint hint--error">
+      <svg class="hint__icon" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="11" stroke="#DE1316" stroke-width="2"/>
+        <path d="M12 7v6" stroke="#DE1316" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="16.5" r="1.2" fill="#DE1316"/>
+      </svg>
+      <div class="hint__content">
+        <div class="hint__title">There are errors in the form</div>
+        <div class="hint__description">Please fix the following errors before submitting:</div>
+        <ul class="hint__error-list">
+          <li><a class="hint__error-link" href="#first-name">First name is required</a></li>
+          <li><a class="hint__error-link" href="#email">Email address is not valid</a></li>
+          <li><a class="hint__error-link" href="#phone">Phone number must be 10 digits</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

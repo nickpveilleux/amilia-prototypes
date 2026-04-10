@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side Nav Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    .side-nav {
+      width: 225px;
+      min-height: 100vh;
+      background: var(--color-sidebar);
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-family);
+    }
+
+    /* Logo / Org area */
+    .side-nav__logo {
+      padding: 25px 70px 10px;
+      text-align: center;
+    }
+
+    .side-nav__logo-img {
+      width: 85px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    .side-nav__org {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-inverse);
+      text-align: center;
+      padding: var(--space-2) var(--space-3);
+    }
+
+    /* Divider */
+    .side-nav__divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      margin: var(--space-1) var(--space-3);
+    }
+
+    /* Menu */
+    .side-nav__menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .side-nav__item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px;
+      padding-left: var(--space-4);
+      font-size: 13.5px;
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-sidebar);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .side-nav__item:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .side-nav__item--selected {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .side-nav__item-icon {
+      width: 17px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .side-nav__item-icon svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Footer */
+    .side-nav__footer {
+      padding: var(--space-5);
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .side-nav__footer-text {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    /* ====== Demo ====== */
+    body {
+      background: var(--color-bg);
+    }
+
+    .demo {
+      display: flex;
+      gap: var(--space-10);
+    }
+
+    .demo-content {
+      padding: var(--space-10);
+      flex: 1;
+    }
+
+    .demo-content h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-2);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <nav class="side-nav">
+      <!-- Logo -->
+      <div class="side-nav__logo">
+        <!-- Placeholder logo circle -->
+        <svg class="side-nav__logo-img" viewBox="0 0 85 40" fill="none">
+          <rect width="85" height="40" rx="4" fill="rgba(255,255,255,0.15)"/>
+          <text x="42" y="24" text-anchor="middle" fill="#ECECEC" font-size="11" font-family="var(--font-family)">LOGO</text>
+        </svg>
+      </div>
+
+      <div class="side-nav__org">Demo Organization</div>
+
+      <hr class="side-nav__divider">
+
+      <!-- Top section -->
+      <ul class="side-nav__menu">
+        <li>
+          <a class="side-nav__item" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><circle cx="8.5" cy="6.5" r="3"/><path d="M1 6.5h4M12 6.5h4"/></svg>
+            </span>
+            Today
+          </a>
+        </li>
+        <li>
+          <a class="side-nav__item side-nav__item--selected" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><path d="M2 2h13v9H2z"/><path d="M2 5h13"/></svg>
+            </span>
+            Home
+          </a>
+        </li>
+        <li>
+          <a class="side-nav__item" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><rect x="1" y="1" width="6" height="5" rx="1"/><rect x="10" y="1" width="6" height="5" rx="1"/><rect x="1" y="7" width="6" height="5" rx="1"/><rect x="10" y="7" width="6" height="5" rx="1"/></svg>
+            </span>
+            Apps
+          </a>
+        </li>
+      </ul>
+
+      <hr class="side-nav__divider">
+
+      <ul class="side-nav__menu">
+        <li>
+          <a class="side-nav__item" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><path d="M8.5 1v11M3 6.5h11"/></svg>
+            </span>
+            Activities
+          </a>
+        </li>
+        <li>
+          <a class="side-nav__item" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><circle cx="6" cy="4" r="3"/><circle cx="12" cy="4" r="3"/><path d="M1 12c0-3 3-5 5-5s5 2 5 5"/></svg>
+            </span>
+            People
+          </a>
+        </li>
+        <li>
+          <a class="side-nav__item" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><path d="M2 3h13M2 6.5h13M2 10h8"/></svg>
+            </span>
+            Reports
+          </a>
+        </li>
+        <li>
+          <a class="side-nav__item" href="#">
+            <span class="side-nav__item-icon">
+              <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><circle cx="8.5" cy="6.5" r="4"/><path d="M8.5 2.5v-1M8.5 11.5v-1M12.5 6.5h1M3.5 6.5h-1"/></svg>
+            </span>
+            Settings
+          </a>
+        </li>
+      </ul>
+
+      <!-- Footer -->
+      <div class="side-nav__footer">
+        <svg width="80" height="20" viewBox="0 0 80 20" fill="none">
+          <rect width="80" height="20" rx="3" fill="rgba(255,255,255,0.1)"/>
+          <text x="40" y="14" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="9" font-family="var(--font-family)">SmartRec</text>
+        </svg>
+      </div>
+    </nav>
+
+    <div class="demo-content">
+      <h3>Side Navigation</h3>
+      <p>The sidebar is displayed to the left. "Home" is shown in the selected state.</p>
+    </div>
+
+  </div>
+</body>
+</html>

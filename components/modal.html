@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Component</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    /* ---- Backdrop ---- */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    /* ---- Modal ---- */
+    .modal {
+      background: var(--color-bg-white);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 4.8px;
+      padding: var(--space-2) 0;
+      width: 500px;
+      max-width: 90vw;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-4);
+      min-height: 40px;
+    }
+
+    .modal__title {
+      font-family: var(--font-family);
+      font-size: var(--text-h5);
+      font-weight: var(--font-weight-medium);
+      color: #565656;
+      line-height: var(--line-height);
+    }
+
+    .modal__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #565656;
+      border-radius: var(--radius);
+      transition: background var(--transition-fast);
+    }
+
+    .modal__close:hover {
+      background: var(--color-stripes);
+    }
+
+    .modal__divider {
+      border: none;
+      border-top: 1px solid var(--color-content-line);
+      margin: var(--space-2) 0;
+    }
+
+    .modal__body {
+      padding: var(--space-3);
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal__body p {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: #565656;
+      line-height: var(--line-height);
+    }
+
+    .modal__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-4);
+      padding: var(--space-1) var(--space-4);
+    }
+
+    .modal__cancel {
+      background: none;
+      border: none;
+      font-family: var(--font-family);
+      font-size: 17px;
+      font-weight: var(--font-weight-medium);
+      color: #6C757D;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: var(--space-1) var(--space-2);
+    }
+
+    .modal__cancel:hover {
+      color: #565656;
+    }
+
+    .modal__action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 6px var(--space-3);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      line-height: 14px;
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .modal__action:hover {
+      background: #1357B0;
+    }
+
+    /* ====== Demo ====== */
+    .demo {
+      padding: var(--space-10);
+    }
+
+    .demo-trigger {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 6px var(--space-3);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+    }
+
+    /* Static demo (no backdrop, inline) */
+    .demo-static .modal {
+      position: static;
+      box-shadow: var(--shadow-card);
+    }
+  </style>
+</head>
+<body>
+  <div class="demo">
+
+    <button class="demo-trigger" onclick="document.getElementById('modal-demo').style.display='flex'">Open Modal</button>
+
+    <!-- Live modal with backdrop -->
+    <div class="modal-backdrop" id="modal-demo" style="display:none">
+      <div class="modal">
+        <div class="modal__header">
+          <span class="modal__title">Modal Title</span>
+          <button class="modal__close" aria-label="Close" onclick="document.getElementById('modal-demo').style.display='none'">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 2l10 10M12 2L2 12"/>
+            </svg>
+          </button>
+        </div>
+        <hr class="modal__divider">
+        <div class="modal__body">
+          <p>Modal body text goes here. This is a completely self-contained modal with backdrop overlay, header, body, and footer with action buttons.</p>
+        </div>
+        <hr class="modal__divider">
+        <div class="modal__footer">
+          <button class="modal__cancel" onclick="document.getElementById('modal-demo').style.display='none'">Cancel</button>
+          <button class="modal__action">Save Changes</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Static preview (always visible) -->
+    <div class="demo-static" style="margin-top:var(--space-8)">
+      <h3 style="margin-bottom:var(--space-4)">Static Preview</h3>
+      <div class="modal">
+        <div class="modal__header">
+          <span class="modal__title">Confirm Action</span>
+          <button class="modal__close" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 2l10 10M12 2L2 12"/>
+            </svg>
+          </button>
+        </div>
+        <hr class="modal__divider">
+        <div class="modal__body">
+          <p>Are you sure you want to proceed with this action? This cannot be undone.</p>
+        </div>
+        <hr class="modal__divider">
+        <div class="modal__footer">
+          <button class="modal__cancel">Cancel</button>
+          <button class="modal__action">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>
