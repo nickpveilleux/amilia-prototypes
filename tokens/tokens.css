@@ -1,51 +1,72 @@
 /* ==========================================================================
    Amilia Design Tokens
    --------------------------------------------------------------------------
-   PLACEHOLDER VALUES — replace with real tokens from Figma design system.
+   Extracted from Figma design system (cXUsKsRJfBbIbjXVL7np9A)
    All components and prototypes reference these variables.
    ========================================================================== */
 
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap');
+
 :root {
-  /* --- Colors --- */
-  --color-primary: #0066FF;
-  --color-primary-hover: #0052CC;
-  --color-primary-light: #E6F0FF;
-  --color-secondary: #6B7280;
-  --color-success: #10B981;
-  --color-warning: #F59E0B;
-  --color-error: #EF4444;
+  /* --- Primary Colors --- */
+  --color-primary: #186DDC;           /* Primary blue */
+  --color-primary-alt: #2B91E1;       /* Amilia blue (accents, borders) */
+  --color-admin: #E67300;             /* Store admin / editing */
+  --color-sidebar: #30383E;           /* Side bar / menu */
+  --color-bg: #EEF4F6;               /* Default background */
+  --color-bg-white: #FFFFFF;          /* Card / content background */
+  --color-header-line: #C2C2C2;       /* Header divider line */
+  --color-content-line: #CED4DA;      /* Content divider line */
+  --color-stripes: #F8F8F8;           /* Table stripe rows */
 
-  --color-text: #111827;
-  --color-text-secondary: #6B7280;
-  --color-text-muted: #9CA3AF;
-  --color-text-inverse: #FFFFFF;
+  /* --- Text Colors --- */
+  --color-text-heading: #0F1111;      /* Headings, titles, price, buttons */
+  --color-text-body: #222626;         /* Body paragraph */
+  --color-text-placeholder: #535353;  /* Placeholders, tooltips */
+  --color-text-help: #707070;         /* Help text */
+  --color-text-inverse: #FFFFFF;      /* Text on dark backgrounds */
 
-  --color-bg: #FFFFFF;
-  --color-bg-secondary: #F9FAFB;
-  --color-bg-tertiary: #F3F4F6;
-  --color-border: #E5E7EB;
-  --color-border-strong: #D1D5DB;
+  /* --- Status Colors --- */
+  --color-success: #00802F;
+  --color-in-progress: #FEC11B;
+  --color-warning: #D68100;
+  --color-error: #DE1316;
+  --color-inactive: #E4E4E4;
+  --color-badge-bg: #CBE1F3;          /* Informative badge background */
+  --color-info-tip: #183252;          /* Info tip icon */
+
+  /* --- Tag Colors --- */
+  --color-tag-brown: #EBBA99;
+  --color-tag-turquoise-light: #B5F5ED;
+  --color-tag-turquoise-dark: #31E3CD;
+  --color-tag-pink-dark: #FFA9ED;
+  --color-tag-purple-light: #DEBDFF;
+  --color-tag-yellow-light: #FFFAB7;
+  --color-tag-purple-dark: #6F1EC0;
+  --color-tag-yellow-dark: #FFF036;
+  --color-tag-pink-light: #FEE5F4;
 
   /* --- Typography --- */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-family: 'Noto Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'SF Mono', 'Fira Code', monospace;
 
-  --text-xs: 0.75rem;    /* 12px */
-  --text-sm: 0.875rem;   /* 14px */
-  --text-base: 1rem;     /* 16px */
-  --text-lg: 1.125rem;   /* 18px */
-  --text-xl: 1.25rem;    /* 20px */
-  --text-2xl: 1.5rem;    /* 24px */
-  --text-3xl: 1.875rem;  /* 30px */
+  /* Headings — all semibold (600), line-height 1.5 */
+  --text-h1: 35px;
+  --text-h2: 28px;
+  --text-h3: 24.5px;
+  --text-h4: 21px;
+  --text-h5: 17.5px;
+  --text-h6: 14px;
+
+  /* Body — 14px base, line-height 1.5 */
+  --text-body: 14px;
 
   --font-weight-normal: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  --line-height-tight: 1.25;
-  --line-height-normal: 1.5;
-  --line-height-relaxed: 1.75;
+  --line-height: 1.5;
 
   /* --- Spacing --- */
   --space-1: 0.25rem;   /* 4px */

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Minimal CSS Reset
+   Minimal CSS Reset — Amilia defaults
    ========================================================================== */
 
 *, *::before, *::after {
@@ -16,9 +16,9 @@ html {
 
 body {
   font-family: var(--font-family);
-  font-size: var(--text-base);
-  line-height: var(--line-height-normal);
-  color: var(--color-text);
+  font-size: var(--text-body);
+  line-height: var(--line-height);
+  color: var(--color-text-body);
   background: var(--color-bg);
 }
 
@@ -41,7 +41,15 @@ button, input, select, textarea {
   color: inherit;
 }
 
+h1 { font-size: var(--text-h1); }
+h2 { font-size: var(--text-h2); }
+h3 { font-size: var(--text-h3); }
+h4 { font-size: var(--text-h4); }
+h5 { font-size: var(--text-h5); }
+h6 { font-size: var(--text-h6); }
+
 h1, h2, h3, h4, h5, h6 {
   font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-tight);
+  line-height: var(--line-height);
+  color: var(--color-text-heading);
 }
