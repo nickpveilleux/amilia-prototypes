@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amilia Component Showcase</title>
+  <link rel="stylesheet" href="../../tokens/reset.css">
+  <link rel="stylesheet" href="../../tokens/tokens.css">
+  <style>
+    body {
+      background: var(--color-bg);
+      padding: var(--padding-screen);
+    }
+
+    .showcase-header {
+      margin-bottom: var(--space-12);
+    }
+
+    .showcase-header h1 {
+      margin-bottom: var(--space-2);
+    }
+
+    .showcase-header p {
+      color: var(--color-text-help);
+      font-size: var(--text-body);
+    }
+
+    .section {
+      margin-bottom: var(--space-12);
+    }
+
+    .section h2 {
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-2);
+      border-bottom: 1px solid var(--color-content-line);
+    }
+
+    .subsection {
+      margin-bottom: var(--space-6);
+    }
+
+    .subsection h3 {
+      font-size: var(--text-h5);
+      margin-bottom: var(--space-3);
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-3);
+    }
+
+    .label {
+      font-size: 11px;
+      color: var(--color-text-help);
+      min-width: 70px;
+    }
+
+    /* ===========================
+       1. BUTTONS
+       =========================== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-2);
+      height: 34px;
+      padding: 6px var(--space-3);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      line-height: 14px;
+      cursor: pointer;
+      transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
+      white-space: nowrap;
+      text-decoration: none;
+    }
+
+    .btn:focus-visible { outline: none; }
+
+    .btn--primary {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+    .btn--primary:hover { background: #1357B0; }
+    .btn--primary:focus-visible { background: #1357B0; box-shadow: 0 0 0 2px #072142; }
+    .btn--primary.btn--inactive { background: #ABABAB; cursor: default; pointer-events: none; }
+
+    .btn--secondary {
+      background: transparent;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+    }
+    .btn--secondary:hover { background: var(--color-primary); color: var(--color-text-inverse); }
+    .btn--secondary:focus-visible { box-shadow: 0 0 0 2px #072142; }
+    .btn--secondary.btn--inactive { background: var(--color-inactive); border-color: #ABABAB; color: #ABABAB; cursor: default; pointer-events: none; }
+
+    .btn--tertiary {
+      background: transparent;
+      color: var(--color-text-heading);
+    }
+    .btn--tertiary:hover { background: #CCCCCC; }
+    .btn--tertiary:focus-visible { box-shadow: 0 0 0 2px #072142; }
+    .btn--tertiary.btn--inactive { opacity: 0.3; cursor: default; pointer-events: none; }
+
+    /* ===========================
+       2. CARDS
+       =========================== */
+    .card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      max-width: 500px;
+    }
+
+    .card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-5);
+      border-bottom: 0.5px solid var(--color-header-line);
+      box-shadow: 0 0 2px var(--color-content-line);
+    }
+
+    .card__title {
+      font-family: var(--font-family);
+      font-size: 16.8px;
+      font-weight: var(--font-weight-normal);
+      color: #565656;
+    }
+
+    .card__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #565656;
+      border-radius: var(--radius);
+      transition: background var(--transition-fast);
+    }
+    .card__close:hover { background: var(--color-stripes); }
+
+    .card__body {
+      padding: var(--space-5);
+      background: var(--color-bg-white);
+    }
+
+    /* ===========================
+       3. HINTS / ALERTS
+       =========================== */
+    .hint {
+      display: flex;
+      gap: var(--space-3);
+      background: var(--color-bg-white);
+      border: 1px solid;
+      border-left-width: 10px;
+      border-radius: 3px;
+      padding: 15px 18px 15px 25px;
+      max-width: 600px;
+    }
+
+    .hint--info { border-color: var(--color-info-tip); }
+    .hint--warning { border-color: var(--color-warning); }
+    .hint--error { border-color: var(--color-error); }
+
+    .hint__icon { flex-shrink: 0; width: 24px; height: 24px; margin-top: 1px; }
+
+    .hint__content { flex: 1; min-width: 0; }
+
+    .hint__title {
+      font-size: 16px;
+      font-weight: var(--font-weight-medium);
+      color: var(--color-text-heading);
+      margin-bottom: var(--space-1);
+    }
+
+    .hint__description {
+      font-size: var(--text-body);
+      color: #565656;
+      line-height: 25px;
+    }
+
+    .hint__error-list { list-style: none; margin-top: var(--space-2); }
+    .hint__error-list li { margin-bottom: var(--space-1); }
+    .hint__error-link { font-size: var(--text-body); color: var(--color-error); text-decoration: underline; }
+
+    /* ===========================
+       4. MODAL
+       =========================== */
+    .modal-static {
+      max-width: 500px;
+    }
+
+    .modal {
+      background: var(--color-bg-white);
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 4.8px;
+      padding: var(--space-2) 0;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--space-4);
+      min-height: 40px;
+    }
+
+    .modal__title {
+      font-size: var(--text-h5);
+      font-weight: var(--font-weight-medium);
+      color: #565656;
+    }
+
+    .modal__close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #565656;
+      border-radius: var(--radius);
+    }
+
+    .modal__divider {
+      border: none;
+      border-top: 1px solid var(--color-content-line);
+      margin: var(--space-2) 0;
+    }
+
+    .modal__body {
+      padding: var(--space-3);
+    }
+
+    .modal__body p {
+      font-size: var(--text-body);
+      color: #565656;
+    }
+
+    .modal__footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: var(--space-4);
+      padding: var(--space-1) var(--space-4);
+    }
+
+    .modal__cancel {
+      background: none;
+      border: none;
+      font-size: 17px;
+      font-weight: var(--font-weight-medium);
+      color: #6C757D;
+      text-decoration: underline;
+      cursor: pointer;
+      padding: var(--space-1) var(--space-2);
+    }
+
+    .modal__action {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 6px var(--space-3);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+    }
+
+    /* ===========================
+       5. TEXT FIELDS
+       =========================== */
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      max-width: 350px;
+    }
+
+    .field__header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+    }
+
+    .field__label-group {
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-1);
+    }
+
+    .field__label {
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+    }
+
+    .field__required {
+      font-size: 11.2px;
+      color: #6C757D;
+    }
+
+    .field__input {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-placeholder);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      padding: 5px var(--space-2);
+      background: var(--color-bg-white);
+      outline: none;
+      transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .field__input::placeholder { color: #ABABAB; }
+
+    .field__input:focus {
+      border-color: #69B3EF;
+      box-shadow: 0 0 5px rgba(105, 179, 239, 0.8);
+    }
+
+    .field--error .field__input { border-color: var(--color-error); }
+
+    .field__error {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: 11.2px;
+      color: var(--color-error);
+    }
+
+    .field__error svg { flex-shrink: 0; width: 14px; height: 14px; }
+
+    .field--disabled .field__label { color: #ABABAB; }
+    .field--disabled .field__input { color: #ABABAB; background: var(--color-stripes); cursor: not-allowed; }
+
+    .field__helper {
+      font-size: 11.2px;
+      color: #6C757D;
+    }
+
+    .field__textarea {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-placeholder);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      padding: var(--space-2);
+      background: var(--color-bg-white);
+      resize: vertical;
+      min-height: 80px;
+      outline: none;
+    }
+
+    /* ===========================
+       6. CHECKBOXES
+       =========================== */
+    .checkbox {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-3);
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .checkbox__input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
+
+    .checkbox__box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--color-header-line);
+      border-radius: 3px;
+      background: var(--color-bg-white);
+      flex-shrink: 0;
+      transition: background var(--transition-fast), border-color var(--transition-fast);
+    }
+
+    .checkbox__check { display: none; }
+    .checkbox__input:checked + .checkbox__box { background: var(--color-primary); border-color: var(--color-primary); }
+    .checkbox__input:checked + .checkbox__box .checkbox__check { display: block; }
+
+    .checkbox--disabled { cursor: default; }
+    .checkbox--disabled .checkbox__box { border-color: var(--color-header-line); background: var(--color-bg-white); }
+    .checkbox--disabled .checkbox__input:checked + .checkbox__box { background: #ABABAB; border-color: #ABABAB; }
+
+    .checkbox__label {
+      font-size: 12px;
+      color: var(--color-text-heading);
+    }
+
+    .checkbox--disabled .checkbox__label { color: #ABABAB; }
+
+    /* ===========================
+       7. DROPDOWNS
+       =========================== */
+    .dropdown {
+      position: relative;
+      max-width: 350px;
+    }
+
+    .dropdown__trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-placeholder);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      padding: 5px var(--space-2);
+      background: var(--color-bg-white);
+      cursor: pointer;
+      outline: none;
+      text-align: left;
+    }
+
+    .dropdown__trigger--placeholder { color: #ABABAB; }
+
+    .dropdown__chevron {
+      flex-shrink: 0;
+      margin-left: var(--space-2);
+      transition: transform var(--transition-fast);
+    }
+
+    .dropdown--open .dropdown__chevron { transform: rotate(180deg); }
+
+    .dropdown__list {
+      position: absolute;
+      top: calc(100% + 2px);
+      left: 0;
+      right: 0;
+      background: var(--color-bg-white);
+      border: 1px solid var(--color-content-line);
+      border-radius: 3px;
+      box-shadow: var(--shadow-card);
+      z-index: 50;
+      max-height: 200px;
+      overflow-y: auto;
+      display: none;
+    }
+
+    .dropdown--open .dropdown__list { display: block; }
+
+    .dropdown__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .dropdown__item:hover { background: #E8F0FE; }
+    .dropdown__item--selected { background: #E8F0FE; font-weight: var(--font-weight-medium); }
+
+    .field--error .dropdown__trigger { border-color: var(--color-error); }
+
+    /* ===========================
+       8. TABS
+       =========================== */
+    .tabs {
+      display: flex;
+      align-items: flex-end;
+      padding: 0 15px;
+      border-bottom: 0.5px solid var(--color-header-line);
+      background: var(--color-bg-white);
+    }
+
+    .tab {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 5px var(--space-5);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-primary);
+      background: transparent;
+      border: none;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      border-bottom: 0.5px solid var(--color-header-line);
+      cursor: pointer;
+      position: relative;
+      margin-bottom: -0.5px;
+    }
+
+    .tab--selected {
+      color: #333333;
+      border: 0.5px solid var(--color-header-line);
+      border-bottom: 0.5px solid var(--color-bg-white);
+      background: var(--color-bg-white);
+      cursor: default;
+    }
+
+    .tab__badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2.5px 5px;
+      background: var(--color-tag-turquoise-light);
+      border-radius: 3px;
+      font-size: 10.5px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-heading);
+      line-height: 1;
+    }
+
+    .tab-panel {
+      padding: var(--space-5);
+      background: var(--color-bg-white);
+    }
+
+    .tabs-card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+      max-width: 600px;
+    }
+
+    /* ===========================
+       9. FILTER BAR
+       =========================== */
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      gap: 17px;
+    }
+
+    .filter-bar__search {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      height: 34px;
+      padding: 0 var(--space-3);
+      background: var(--color-bg-white);
+      border: 1px solid #ABABAB;
+      border-radius: 3px;
+      min-width: 220px;
+    }
+
+    .filter-bar__search-icon { flex-shrink: 0; color: #ABABAB; }
+
+    .filter-bar__search-input {
+      flex: 1;
+      border: none;
+      background: transparent;
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      outline: none;
+    }
+
+    .filter-bar__search-input::placeholder { color: #ABABAB; }
+
+    .filter-bar__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 6px var(--space-3);
+      background: transparent;
+      color: var(--color-primary);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .filter-bar__btn:hover {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+    }
+
+    /* ===========================
+       10. TOOLTIP
+       =========================== */
+    .tooltip-trigger {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tooltip-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 21px;
+      cursor: help;
+    }
+
+    .tooltip-popover {
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--color-sidebar);
+      border-radius: 3px;
+      padding: 10px;
+      min-width: 180px;
+      max-width: 280px;
+      white-space: normal;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity var(--transition-fast);
+    }
+
+    .tooltip-trigger:hover .tooltip-popover,
+    .tooltip-trigger--demo .tooltip-popover {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .tooltip-popover__text {
+      font-size: 10px;
+      color: #F8F8F8;
+      line-height: 15px;
+    }
+
+    .tooltip-popover__arrow {
+      position: absolute;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid var(--color-sidebar);
+    }
+
+    /* ===========================
+       11. DATA TABLE
+       =========================== */
+    .table-card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+
+    .table-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-5);
+      border-bottom: 1px solid var(--color-content-line);
+    }
+
+    .table-topbar__title {
+      font-size: 16.8px;
+      font-weight: var(--font-weight-normal);
+      color: #565656;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th,
+    .table td {
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-body);
+    }
+
+    .table th {
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-heading);
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-content-line);
+      white-space: nowrap;
+    }
+
+    .table td {
+      color: var(--color-text-body);
+    }
+
+    .table tbody tr:nth-child(odd) { background: var(--color-stripes); }
+    .table tbody tr:nth-child(even) { background: var(--color-bg-white); }
+
+    .table__sortable { cursor: pointer; user-select: none; }
+    .table__sortable:hover { color: var(--color-primary); }
+
+    .table__sort-icon {
+      display: inline-block;
+      margin-left: var(--space-1);
+      vertical-align: middle;
+    }
+
+    .table__checkbox { width: 40px; }
+
+    .table__checkbox-input {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--color-primary);
+      cursor: pointer;
+    }
+
+    .table__link {
+      color: var(--color-primary);
+      text-decoration: none;
+    }
+    .table__link:hover { text-decoration: underline; }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px var(--space-2);
+      border-radius: 3px;
+      font-size: 12px;
+      font-weight: var(--font-weight-medium);
+      white-space: nowrap;
+    }
+
+    .status-badge--active { background: #D4EDDA; color: var(--color-success); }
+    .status-badge--pending { background: #FFF3CD; color: #856404; }
+    .status-badge--inactive { background: var(--color-inactive); color: #6C757D; }
+    .status-badge--error { background: #F8D7DA; color: var(--color-error); }
+
+    .table-pagination {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-3) var(--space-5);
+      border-top: 1px solid var(--color-content-line);
+    }
+
+    .table-pagination__info {
+      font-size: var(--text-body);
+      color: #565656;
+    }
+
+    .table-pagination__pages {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+    }
+
+    .table-pagination__btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      padding: 0 var(--space-2);
+      background: none;
+      border: 1px solid var(--color-content-line);
+      border-radius: var(--radius);
+      font-size: var(--text-body);
+      color: var(--color-text-body);
+      cursor: pointer;
+    }
+
+    .table-pagination__btn:hover { background: var(--color-stripes); }
+
+    .table-pagination__btn--active {
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border-color: var(--color-primary);
+    }
+
+    .table-pagination__btn--nav { color: var(--color-text-heading); }
+    .table-pagination__btn:disabled { opacity: 0.4; cursor: default; }
+
+    /* ===========================
+       12. SIDE NAVIGATION
+       =========================== */
+    .side-nav-demo {
+      display: inline-flex;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .side-nav {
+      width: 225px;
+      background: var(--color-sidebar);
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-family);
+    }
+
+    .side-nav__logo {
+      padding: 25px 70px 10px;
+      text-align: center;
+    }
+
+    .side-nav__org {
+      font-size: var(--text-body);
+      color: var(--color-text-inverse);
+      text-align: center;
+      padding: var(--space-2) var(--space-3);
+    }
+
+    .side-nav__divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      margin: var(--space-1) var(--space-3);
+    }
+
+    .side-nav__menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .side-nav__item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 10px var(--space-4);
+      font-size: 13.5px;
+      color: var(--color-text-sidebar);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background var(--transition-fast);
+    }
+
+    .side-nav__item:hover { background: rgba(255, 255, 255, 0.1); text-decoration: none; }
+    .side-nav__item--selected { background: rgba(255, 255, 255, 0.15); }
+
+    .side-nav__item-icon {
+      width: 17px;
+      height: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .side-nav__item-icon svg { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+
+  <div class="showcase-header">
+    <h1>Amilia Component Showcase</h1>
+    <p>Design system components extracted from Figma</p>
+  </div>
+
+  <!-- ==================== 1. BUTTONS ==================== -->
+  <div class="section">
+    <h2>Buttons</h2>
+
+    <div class="subsection">
+      <h3>Primary</h3>
+      <div class="row">
+        <span class="label">Default</span>
+        <button class="btn btn--primary">Primary</button>
+      </div>
+      <div class="row">
+        <span class="label">Hover</span>
+        <button class="btn btn--primary" style="background:#1357B0">Primary Hover</button>
+      </div>
+      <div class="row">
+        <span class="label">Inactive</span>
+        <button class="btn btn--primary btn--inactive">Primary Inactive</button>
+      </div>
+      <div class="row">
+        <span class="label">Focus</span>
+        <button class="btn btn--primary" style="background:#1357B0;box-shadow:0 0 0 2px #072142">Primary Focus</button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Secondary</h3>
+      <div class="row">
+        <span class="label">Default</span>
+        <button class="btn btn--secondary">Secondary</button>
+      </div>
+      <div class="row">
+        <span class="label">Hover</span>
+        <button class="btn btn--secondary" style="background:var(--color-primary);color:white">Secondary Hover</button>
+      </div>
+      <div class="row">
+        <span class="label">Inactive</span>
+        <button class="btn btn--secondary btn--inactive">Secondary Inactive</button>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Tertiary</h3>
+      <div class="row">
+        <span class="label">Default</span>
+        <button class="btn btn--tertiary">Tertiary</button>
+      </div>
+      <div class="row">
+        <span class="label">Hover</span>
+        <button class="btn btn--tertiary" style="background:#CCCCCC">Tertiary Hover</button>
+      </div>
+      <div class="row">
+        <span class="label">Inactive</span>
+        <button class="btn btn--tertiary btn--inactive">Tertiary Inactive</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 2. CARDS ==================== -->
+  <div class="section">
+    <h2>Cards</h2>
+
+    <div class="subsection">
+      <h3>Basic Card</h3>
+      <div class="card">
+        <div class="card__header">
+          <span class="card__title">Card Title</span>
+        </div>
+        <div class="card__body">
+          <p>Card body content goes here. This is a basic card with a title header and body section.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Card with Close Button</h3>
+      <div class="card">
+        <div class="card__header">
+          <span class="card__title">Card with Close</span>
+          <button class="card__close" aria-label="Close">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 2l10 10M12 2L2 12"/>
+            </svg>
+          </button>
+        </div>
+        <div class="card__body">
+          <p>This card has an optional close button in the title bar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 3. HINTS / ALERTS ==================== -->
+  <div class="section">
+    <h2>Hints / Alerts</h2>
+
+    <div class="subsection">
+      <h3>Information</h3>
+      <div class="hint hint--info">
+        <svg class="hint__icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="11" stroke="#183252" stroke-width="2"/>
+          <path d="M12 11v6" stroke="#183252" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="7.5" r="1.2" fill="#183252"/>
+        </svg>
+        <div class="hint__content">
+          <div class="hint__title">Information title</div>
+          <div class="hint__description">This is an informational message providing helpful context to the user about a feature or process.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Warning</h3>
+      <div class="hint hint--warning">
+        <svg class="hint__icon" viewBox="0 0 24 24" fill="none">
+          <path d="M12 2L1 21h22L12 2z" stroke="#D68100" stroke-width="2" stroke-linejoin="round"/>
+          <path d="M12 10v5" stroke="#D68100" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="18" r="1" fill="#D68100"/>
+        </svg>
+        <div class="hint__content">
+          <div class="hint__title">Warning title</div>
+          <div class="hint__description">This is a warning message alerting the user to something that requires their attention but is not critical.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Error Summary</h3>
+      <div class="hint hint--error">
+        <svg class="hint__icon" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="11" stroke="#DE1316" stroke-width="2"/>
+          <path d="M12 7v6" stroke="#DE1316" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="12" cy="16.5" r="1.2" fill="#DE1316"/>
+        </svg>
+        <div class="hint__content">
+          <div class="hint__title">There are errors in the form</div>
+          <div class="hint__description">Please fix the following errors before submitting:</div>
+          <ul class="hint__error-list">
+            <li><a class="hint__error-link" href="#">First name is required</a></li>
+            <li><a class="hint__error-link" href="#">Email address is not valid</a></li>
+            <li><a class="hint__error-link" href="#">Phone number must be 10 digits</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 4. MODAL ==================== -->
+  <div class="section">
+    <h2>Modal</h2>
+
+    <div class="subsection">
+      <h3>Static Preview</h3>
+      <div class="modal-static">
+        <div class="modal">
+          <div class="modal__header">
+            <span class="modal__title">Confirm Action</span>
+            <button class="modal__close" aria-label="Close">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.5">
+                <path d="M2 2l10 10M12 2L2 12"/>
+              </svg>
+            </button>
+          </div>
+          <hr class="modal__divider">
+          <div class="modal__body">
+            <p>Are you sure you want to proceed with this action? This cannot be undone.</p>
+          </div>
+          <hr class="modal__divider">
+          <div class="modal__footer">
+            <button class="modal__cancel">Cancel</button>
+            <button class="modal__action">Confirm</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 5. TEXT FIELDS ==================== -->
+  <div class="section">
+    <h2>Text Fields</h2>
+
+    <div class="subsection">
+      <h3>Default with Value</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">First name</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <input class="field__input" type="text" value="John">
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Focused</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Email</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <input class="field__input" type="email" value="john@example.com" style="border-color:#69B3EF;box-shadow:0 0 5px rgba(105,179,239,0.8)">
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Error</h3>
+      <div class="field field--error">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Phone number</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <input class="field__input" type="text" value="123">
+        <div class="field__error">
+          <svg viewBox="0 0 14 14" fill="none">
+            <circle cx="7" cy="7" r="6" stroke="#DE1316" stroke-width="1.5"/>
+            <path d="M7 4v4" stroke="#DE1316" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="7" cy="10.5" r="0.8" fill="#DE1316"/>
+          </svg>
+          Phone number must be 10 digits
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Disabled</h3>
+      <div class="field field--disabled">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Account ID</label>
+          </div>
+        </div>
+        <input class="field__input" type="text" value="ACC-12345" disabled>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>With Helper Text</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">First name</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <input class="field__input" type="text" value="John">
+        <span class="field__helper">Enter your legal first name</span>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Optional Indicator</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Middle name</label>
+            <span class="field__required">(Optional)</span>
+          </div>
+        </div>
+        <input class="field__input" type="text" placeholder="Enter middle name">
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Large (Textarea)</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Description</label>
+            <span class="field__required">(Optional)</span>
+          </div>
+        </div>
+        <textarea class="field__textarea" placeholder="Enter a description..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 6. CHECKBOXES ==================== -->
+  <div class="section">
+    <h2>Checkboxes</h2>
+
+    <div class="row">
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox">
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Unchecked</span>
+      </label>
+
+      <label class="checkbox">
+        <input class="checkbox__input" type="checkbox" checked>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Checked</span>
+      </label>
+
+      <label class="checkbox checkbox--disabled">
+        <input class="checkbox__input" type="checkbox" disabled>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Disabled</span>
+      </label>
+
+      <label class="checkbox checkbox--disabled">
+        <input class="checkbox__input" type="checkbox" checked disabled>
+        <span class="checkbox__box">
+          <svg class="checkbox__check" width="12" height="10" viewBox="0 0 12 10" fill="none">
+            <path d="M1 5l3.5 3.5L11 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </span>
+        <span class="checkbox__label">Checked Disabled</span>
+      </label>
+    </div>
+  </div>
+
+  <!-- ==================== 7. DROPDOWNS ==================== -->
+  <div class="section">
+    <h2>Dropdowns</h2>
+
+    <div class="subsection">
+      <h3>Closed / Default</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Province</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropdown__trigger">
+            <span>Quebec</span>
+            <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection" style="padding-bottom: var(--space-16);">
+      <h3>Open</h3>
+      <div class="field">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Country</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <div class="dropdown dropdown--open">
+          <button class="dropdown__trigger">
+            <span>Canada</span>
+            <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <div class="dropdown__list">
+            <div class="dropdown__item dropdown__item--selected">Canada</div>
+            <div class="dropdown__item">United States</div>
+            <div class="dropdown__item">Mexico</div>
+            <div class="dropdown__item">France</div>
+            <div class="dropdown__item">United Kingdom</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <h3>Error</h3>
+      <div class="field field--error">
+        <div class="field__header">
+          <div class="field__label-group">
+            <label class="field__label">Location</label>
+            <span class="field__required">(Required)</span>
+          </div>
+        </div>
+        <div class="dropdown">
+          <button class="dropdown__trigger dropdown__trigger--placeholder">
+            <span>Select a location</span>
+            <svg class="dropdown__chevron" width="10" height="6" viewBox="0 0 10 6" fill="none">
+              <path d="M1 1l4 4 4-4" stroke="#535353" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="field__error">
+          <svg viewBox="0 0 14 14" fill="none">
+            <circle cx="7" cy="7" r="6" stroke="#DE1316" stroke-width="1.5"/>
+            <path d="M7 4v4" stroke="#DE1316" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="7" cy="10.5" r="0.8" fill="#DE1316"/>
+          </svg>
+          Location is required
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 8. TABS ==================== -->
+  <div class="section">
+    <h2>Tabs</h2>
+
+    <div class="tabs-card">
+      <div class="tabs">
+        <button class="tab tab--selected">General</button>
+        <button class="tab">Schedule <span class="tab__badge">3</span></button>
+        <button class="tab">Pricing</button>
+        <button class="tab">Registration <span class="tab__badge">12</span></button>
+        <button class="tab">Settings</button>
+      </div>
+      <div class="tab-panel">
+        <p>Tab content for "General" would appear here.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 9. FILTER BAR ==================== -->
+  <div class="section">
+    <h2>Filter Bar</h2>
+
+    <div class="filter-bar">
+      <div class="filter-bar__search">
+        <svg class="filter-bar__search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="6.5" cy="6.5" r="5.5" stroke="#ABABAB" stroke-width="1.5"/>
+          <path d="M11 11l4 4" stroke="#ABABAB" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <input class="filter-bar__search-input" type="text" placeholder="Search">
+      </div>
+      <button class="filter-bar__btn">Columns (8)</button>
+      <button class="filter-bar__btn">Filters (2)</button>
+    </div>
+  </div>
+
+  <!-- ==================== 10. TOOLTIP ==================== -->
+  <div class="section" style="padding-top: var(--space-16);">
+    <h2>Tooltip</h2>
+
+    <div class="row" style="gap: var(--space-12);">
+      <div>
+        <p style="margin-bottom: var(--space-2); font-size: var(--text-body); color: var(--color-text-help);">Hover to show:</p>
+        <span class="tooltip-trigger">
+          <svg class="tooltip-icon" viewBox="0 0 18 21" fill="none">
+            <circle cx="9" cy="10.5" r="8" stroke="#183252" stroke-width="1.5"/>
+            <text x="9" y="15" text-anchor="middle" fill="#183252" font-size="12" font-weight="600" font-family="var(--font-family)">?</text>
+          </svg>
+          <span class="tooltip-popover">
+            <span class="tooltip-popover__text">This field controls the visibility of the activity in the public store listing.</span>
+            <span class="tooltip-popover__arrow"></span>
+          </span>
+        </span>
+      </div>
+
+      <div>
+        <p style="margin-bottom: var(--space-2); font-size: var(--text-body); color: var(--color-text-help);">Always visible:</p>
+        <span class="tooltip-trigger tooltip-trigger--demo">
+          <svg class="tooltip-icon" viewBox="0 0 18 21" fill="none">
+            <circle cx="9" cy="10.5" r="8" stroke="#183252" stroke-width="1.5"/>
+            <text x="9" y="15" text-anchor="middle" fill="#183252" font-size="12" font-weight="600" font-family="var(--font-family)">?</text>
+          </svg>
+          <span class="tooltip-popover">
+            <span class="tooltip-popover__text">Maximum number of participants allowed per session. Leave empty for unlimited.</span>
+            <span class="tooltip-popover__arrow"></span>
+          </span>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 11. DATA TABLE ==================== -->
+  <div class="section">
+    <h2>Data Table</h2>
+
+    <div class="table-card">
+      <div class="table-topbar">
+        <span class="table-topbar__title">Members</span>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th class="table__checkbox">
+              <input class="table__checkbox-input" type="checkbox" aria-label="Select all">
+            </th>
+            <th class="table__sortable">
+              Name
+              <svg class="table__sort-icon" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M4 0L7.5 4H0.5L4 0Z" fill="#0F1111"/>
+                <path d="M4 12L0.5 8H7.5L4 12Z" fill="#CED4DA"/>
+              </svg>
+            </th>
+            <th class="table__sortable">
+              Email
+              <svg class="table__sort-icon" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M4 0L7.5 4H0.5L4 0Z" fill="#CED4DA"/>
+                <path d="M4 12L0.5 8H7.5L4 12Z" fill="#CED4DA"/>
+              </svg>
+            </th>
+            <th>Status</th>
+            <th class="table__sortable">
+              Joined
+              <svg class="table__sort-icon" width="8" height="12" viewBox="0 0 8 12" fill="none">
+                <path d="M4 0L7.5 4H0.5L4 0Z" fill="#CED4DA"/>
+                <path d="M4 12L0.5 8H7.5L4 12Z" fill="#0F1111"/>
+              </svg>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">Alice Martin</a></td>
+            <td>alice.martin@example.com</td>
+            <td><span class="status-badge status-badge--active">Active</span></td>
+            <td>2025-01-15</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">Bob Johnson</a></td>
+            <td>bob.j@example.com</td>
+            <td><span class="status-badge status-badge--pending">Pending</span></td>
+            <td>2025-02-20</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox" checked></td>
+            <td><a class="table__link" href="#">Claire Dubois</a></td>
+            <td>claire.d@example.com</td>
+            <td><span class="status-badge status-badge--active">Active</span></td>
+            <td>2025-03-01</td>
+          </tr>
+          <tr>
+            <td class="table__checkbox"><input class="table__checkbox-input" type="checkbox"></td>
+            <td><a class="table__link" href="#">David Lee</a></td>
+            <td>david.lee@example.com</td>
+            <td><span class="status-badge status-badge--inactive">Inactive</span></td>
+            <td>2024-11-10</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="table-pagination">
+        <span class="table-pagination__info">Showing 1-4 of 24</span>
+        <div class="table-pagination__pages">
+          <button class="table-pagination__btn table-pagination__btn--nav" disabled aria-label="Previous">
+            <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6.5 1L1.5 6l5 5"/></svg>
+          </button>
+          <button class="table-pagination__btn table-pagination__btn--active">1</button>
+          <button class="table-pagination__btn">2</button>
+          <button class="table-pagination__btn">3</button>
+          <button class="table-pagination__btn table-pagination__btn--nav" aria-label="Next">
+            <svg width="8" height="12" viewBox="0 0 8 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M1.5 1l5 5-5 5"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== 12. SIDE NAVIGATION ==================== -->
+  <div class="section">
+    <h2>Side Navigation</h2>
+
+    <div class="side-nav-demo">
+      <nav class="side-nav">
+        <div class="side-nav__logo">
+          <svg width="85" height="40" viewBox="0 0 85 40" fill="none">
+            <rect width="85" height="40" rx="4" fill="rgba(255,255,255,0.15)"/>
+            <text x="42" y="24" text-anchor="middle" fill="#ECECEC" font-size="11" font-family="var(--font-family)">LOGO</text>
+          </svg>
+        </div>
+
+        <div class="side-nav__org">Demo Organization</div>
+        <hr class="side-nav__divider">
+
+        <ul class="side-nav__menu">
+          <li>
+            <a class="side-nav__item" href="#">
+              <span class="side-nav__item-icon">
+                <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><circle cx="8.5" cy="6.5" r="3"/><path d="M1 6.5h4M12 6.5h4"/></svg>
+              </span>
+              Today
+            </a>
+          </li>
+          <li>
+            <a class="side-nav__item side-nav__item--selected" href="#">
+              <span class="side-nav__item-icon">
+                <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><path d="M2 2h13v9H2z"/><path d="M2 5h13"/></svg>
+              </span>
+              Home
+            </a>
+          </li>
+          <li>
+            <a class="side-nav__item" href="#">
+              <span class="side-nav__item-icon">
+                <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><rect x="1" y="1" width="6" height="5" rx="1"/><rect x="10" y="1" width="6" height="5" rx="1"/><rect x="1" y="7" width="6" height="5" rx="1"/><rect x="10" y="7" width="6" height="5" rx="1"/></svg>
+              </span>
+              Apps
+            </a>
+          </li>
+        </ul>
+
+        <hr class="side-nav__divider">
+
+        <ul class="side-nav__menu">
+          <li>
+            <a class="side-nav__item" href="#">
+              <span class="side-nav__item-icon">
+                <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><circle cx="6" cy="4" r="3"/><circle cx="12" cy="4" r="3"/><path d="M1 12c0-3 3-5 5-5s5 2 5 5"/></svg>
+              </span>
+              People
+            </a>
+          </li>
+          <li>
+            <a class="side-nav__item" href="#">
+              <span class="side-nav__item-icon">
+                <svg viewBox="0 0 17 13" fill="none" stroke="#ECECEC" stroke-width="1.5"><path d="M2 3h13M2 6.5h13M2 10h8"/></svg>
+              </span>
+              Reports
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</body>
+</html>

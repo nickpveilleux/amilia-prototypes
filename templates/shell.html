@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amilia Admin Shell</title>
+  <link rel="stylesheet" href="../tokens/reset.css">
+  <link rel="stylesheet" href="../tokens/tokens.css">
+  <style>
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      background: var(--color-bg);
+    }
+
+    /* ---- Sidebar ---- */
+    .sidebar {
+      width: 225px;
+      min-width: 225px;
+      background: var(--color-sidebar);
+      display: flex;
+      flex-direction: column;
+      font-family: var(--font-family);
+      height: 100vh;
+      position: sticky;
+      top: 0;
+    }
+
+    .sidebar__logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-6) var(--space-4) var(--space-3);
+    }
+
+    .sidebar__logo-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-inverse);
+      font-size: 24px;
+      font-weight: var(--font-weight-bold);
+    }
+
+    .sidebar__org {
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-inverse);
+      text-align: center;
+      padding: var(--space-1) var(--space-3) var(--space-3);
+    }
+
+    .sidebar__divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      margin: var(--space-1) var(--space-3);
+    }
+
+    .sidebar__menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar__menu--main {
+      flex: 1;
+    }
+
+    .sidebar__item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 10px var(--space-4);
+      font-size: 13.5px;
+      font-weight: var(--font-weight-normal);
+      color: var(--color-text-sidebar);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+      text-decoration: none;
+    }
+
+    .sidebar__item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      text-decoration: none;
+    }
+
+    .sidebar__item--selected {
+      background: #52585C;
+    }
+
+    .sidebar__item-icon {
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+
+    .sidebar__footer {
+      padding: var(--space-4);
+      margin-top: auto;
+    }
+
+    .sidebar__footer-text {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.4);
+      text-align: center;
+    }
+
+    /* ---- Main area ---- */
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ---- Header bar ---- */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-primary);
+      height: 50px;
+      padding: 0 var(--space-5);
+      flex-shrink: 0;
+    }
+
+    .header__title {
+      font-family: var(--font-family);
+      font-size: 18px;
+      font-weight: var(--font-weight-semibold);
+      color: var(--color-text-inverse);
+    }
+
+    .header__user {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      color: var(--color-text-inverse);
+    }
+
+    /* ---- Sub-navigation ---- */
+    .subnav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--color-bg-white);
+      border-bottom: 1px solid var(--color-header-line);
+      padding: var(--space-2) var(--space-5);
+      flex-shrink: 0;
+    }
+
+    .subnav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--space-5);
+    }
+
+    .subnav__link {
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-normal);
+      color: var(--color-primary);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .subnav__link:hover {
+      text-decoration: underline;
+    }
+
+    .subnav__link--active {
+      font-weight: var(--font-weight-bold);
+      color: var(--color-text-heading);
+      cursor: default;
+    }
+
+    .subnav__link--active:hover {
+      text-decoration: none;
+    }
+
+    .subnav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+    }
+
+    .subnav__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 34px;
+      padding: 6px var(--space-3);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font-family);
+      font-size: var(--text-body);
+      font-weight: var(--font-weight-medium);
+      cursor: pointer;
+      transition: background var(--transition-fast);
+    }
+
+    .subnav__btn:hover {
+      background: #1357B0;
+    }
+
+    /* ---- Content area ---- */
+    .content {
+      flex: 1;
+      padding: var(--space-10) 35px;
+    }
+
+    .content__card {
+      background: var(--color-bg-white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-card);
+      padding: var(--padding-card);
+    }
+
+    .content__placeholder {
+      background: var(--color-inactive);
+      border-radius: var(--radius);
+      height: 20px;
+      margin-bottom: var(--space-3);
+    }
+
+    .content__placeholder--wide {
+      width: 100%;
+    }
+
+    .content__placeholder--medium {
+      width: 70%;
+    }
+
+    .content__placeholder--narrow {
+      width: 40%;
+    }
+
+    .content__placeholder--title {
+      height: 28px;
+      width: 50%;
+      margin-bottom: var(--space-5);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar__logo">
+      <div class="sidebar__logo-circle">A</div>
+    </div>
+    <div class="sidebar__org">Station r&eacute;cr&eacute;ative Amilia</div>
+
+    <hr class="sidebar__divider">
+
+    <!-- Top items -->
+    <ul class="sidebar__menu">
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#9737;</span> Today</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#8962;</span> Home</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#9638;</span> Apps</a></li>
+    </ul>
+
+    <hr class="sidebar__divider">
+
+    <!-- Main items -->
+    <ul class="sidebar__menu sidebar__menu--main">
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#128100;</span> Account</a></li>
+      <li><a class="sidebar__item sidebar__item--selected" href="#"><span class="sidebar__item-icon">&#128101;</span> Clients</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#128106;</span> Members</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#128722;</span> Store</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#128197;</span> Activities</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#128202;</span> Reports</a></li>
+      <li><a class="sidebar__item" href="#"><span class="sidebar__item-icon">&#9881;</span> Settings</a></li>
+    </ul>
+
+    <hr class="sidebar__divider">
+
+    <!-- Footer -->
+    <div class="sidebar__footer">
+      <div class="sidebar__footer-text">SmartRec by Amilia</div>
+    </div>
+  </nav>
+
+  <!-- Main content -->
+  <div class="main">
+
+    <!-- Blue header -->
+    <div class="header">
+      <span class="header__title">Clients</span>
+      <span class="header__user">admin@amilia.com &#9662; | FR</span>
+    </div>
+
+    <!-- Sub-navigation -->
+    <div class="subnav">
+      <div class="subnav__links">
+        <span class="subnav__link subnav__link--active">Accounts</span>
+        <a class="subnav__link" href="#">People</a>
+      </div>
+      <div class="subnav__actions">
+        <button class="subnav__btn">Store</button>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="content__card">
+        <div class="content__placeholder content__placeholder--title"></div>
+        <div class="content__placeholder content__placeholder--wide"></div>
+        <div class="content__placeholder content__placeholder--wide"></div>
+        <div class="content__placeholder content__placeholder--medium"></div>
+        <div class="content__placeholder content__placeholder--wide"></div>
+        <div class="content__placeholder content__placeholder--narrow"></div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
